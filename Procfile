@@ -1,1 +1,1 @@
-worker: python3 Llama_Check_BOT.py
+worker: python3 C:\Users\Nico\Documents\Python Projects\llama_check_BOTLlama_Check_BOT.py
