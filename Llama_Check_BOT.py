@@ -1,6 +1,6 @@
 import csv
 import discord
-import token
+from token import token
 
 from discord.ext import commands
 
@@ -22,4 +22,4 @@ async def llama(ctx, llama_number):
     await ctx.channel.send(image)
 
 
-bot.run(token.token)
+bot.run(token)
