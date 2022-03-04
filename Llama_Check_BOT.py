@@ -4,7 +4,7 @@ from os import getenv
 from discord.ext import commands
 
 load_dotenv()
-token = getenv("TOKEN")
+token = getenv("DISCORD_TOKEN")
 
 bot = commands.Bot(command_prefix="!")
 
