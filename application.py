@@ -116,4 +116,4 @@ def delete_destination():
 
     return 'Destination has been deleted'
 
-app.run()
+app.run(host = '0.0.0.0')
