@@ -1,4 +1,3 @@
-from email.mime import application
 import flask
 from flask import jsonify
 from flask import request
@@ -6,14 +5,19 @@ from sql_shortcuts import create_connection
 from sql_shortcuts import execute_read_query
 from sql_shortcuts import execute_query
 
-application = flask.Flask(__name__)  # sets up the application
-application.config["DEBUG"] = True  # allow to show errors in browser
+
+app = flask.Flask(__name__)  # sets up the app
+app.config["DEBUG"] = True  # allow to show errors in browser
 
 conn = create_connection(
     'cis3368.c2qcuzhb6ali.us-east-1.rds.amazonaws.com', 'nprodas', 'nprodas3368', 'CIS3368_db')
 
+@app.route('/', methods=['GET']) # default url without any routing as GET request
+def home():
+    return "<h1> WELCOME TO OUR FIRST API! </h1>"
+    
 # GET method API is used to get trip id from URL params
-@application.route('/api/trip', methods=['GET'])
+@app.route('/api/trip', methods=['GET'])
 def get_trip():
     if 'id' in request.args:
         id = int(request.args['id'])
@@ -32,7 +36,7 @@ def get_trip():
 
 
 # POST method API takes a json body script and adds the new trip to the table
-@application.route('/api/trip', methods=['POST'])
+@app.route('/api/trip', methods=['POST'])
 def add_trip():
     request_data = request.get_json()
     new_trip = request_data['trip_name']
@@ -49,7 +53,7 @@ def add_trip():
     return 'New trip has been added'
 
 # PUT method API that gets trip id from URL params to update that trip's attributes
-@application.route('/api/trip', methods=['PUT'])
+@app.route('/api/trip', methods=['PUT'])
 def update_trip():
     if 'id' in request.args:
         id = int(request.args['id'])
@@ -68,7 +72,7 @@ def update_trip():
     return 'Trip has been updated'
 
 # POST method API takes a json body script and adds the new destination to the table
-@application.route('/api/destination', methods=['POST'])
+@app.route('/api/destination', methods=['POST'])
 def add_destination():
     request_data = request.get_json()
     new_country = request_data['country']
@@ -83,7 +87,7 @@ def add_destination():
     return 'New destination has been added'
 
 # PUT method API that gets destination id from URL params to update that destination attributes
-@application.route('/api/destination', methods=['PUT'])
+@app.route('/api/destination', methods=['PUT'])
 def update_destination():
     if 'id' in request.args:
         id = int(request.args['id'])
@@ -101,7 +105,7 @@ def update_destination():
     return 'Destination has been updated'
 
 # DELETE method API uses json get request for id
-@application.route('/api/destination', methods=['DELETE'])
+@app.route('/api/destination', methods=['DELETE'])
 def delete_destination():
     request_data = request.get_json()
     idToDelete = int(request_data['id'])
@@ -112,4 +116,4 @@ def delete_destination():
 
     return 'Destination has been deleted'
 
-application.run()
+app.run()
