@@ -116,4 +116,4 @@ def delete_destination():
 
     return 'Destination has been deleted'
 
-app.run(host = '0.0.0.0')
+app.run(threaded=True, port=5000)
