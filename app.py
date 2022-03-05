@@ -7,7 +7,7 @@ from sql_shortcuts import execute_query
 
 
 app = flask.Flask(__name__)  # sets up the app
-# app.config["DEBUG"] = True  # allow to show errors in browser
+app.config["DEBUG"] = True  # allow to show errors in browser
 
 conn = create_connection(
     'cis3368.c2qcuzhb6ali.us-east-1.rds.amazonaws.com', 'nprodas', 'nprodas3368', 'CIS3368_db')
@@ -115,5 +115,6 @@ def delete_destination():
     execute_query(conn, remove_query)
 
     return 'Destination has been deleted'
-
-app.run(threaded=True, port=5000)
+    
+if __name__ == "__main__":
+    app.run()
