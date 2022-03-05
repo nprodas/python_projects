@@ -12,10 +12,6 @@ app.config["DEBUG"] = True  # allow to show errors in browser
 conn = create_connection(
     'cis3368.c2qcuzhb6ali.us-east-1.rds.amazonaws.com', 'nprodas', 'nprodas3368', 'CIS3368_db')
 
-@app.route('/test', methods=['GET']) # default url without any routing as GET request
-def home():
-    return "<h1> WELCOME TO OUR FIRST API! </h1>"
-
 # GET method API is used to get trip id from URL params
 @app.route('/api/trip', methods=['GET'])
 def get_trip():
@@ -115,6 +111,6 @@ def delete_destination():
     execute_query(conn, remove_query)
 
     return 'Destination has been deleted'
-    
+
 if __name__ == "__main__":
     app.run()
