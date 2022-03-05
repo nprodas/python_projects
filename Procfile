@@ -1,1 +1,1 @@
-worker: python Llama_Check_BOT.py
+web: gunicorn app:app
